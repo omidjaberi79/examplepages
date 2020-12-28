@@ -11,10 +11,23 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="../../plugins/iCheck/all.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="../../plugins/colorpicker/bootstrap-colorpicker.min.css">
+  <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
+  <!-- Persian Data Picker -->
+  <link rel="stylesheet" href="../../dist/css/persian-datepicker.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
   <!-- bootstrap rtl -->
   <link rel="stylesheet" href="../../dist/css/bootstrap-rtl.min.css">
   <!-- template rtl version -->
@@ -581,11 +594,11 @@ include "../../functs/basedata.php";
 				  ?>
 				  <div class="form-group">
                     <label>نام خریدار</label>
-                    <input type="text" class="form-control" placeholder=" نام را وارد کنید " name="txtnameorder">
+                    <input type="text" class="form-control" placeholder=" نام را وارد کنید " name="txtnameorder" id="txtnewcustomer" disabled>
                   </div>
 				  <div class="form-group">
                     <label>خریدار ها</label>
-                    <select class="form-control" name="txtnameorder">
+                    <select class="form-control" name="txtnameorder" id="txtcustomers">
 					<?php
 						$sqlprname = "SELECT * FROM `official_user_hoghoghi`";
                         $resultprname=$connect->query($sqlprname);
@@ -600,11 +613,11 @@ include "../../functs/basedata.php";
                   </div>
 				  <label >خریدار</label>
 				    <div class="form-check">
-                      <input class="form-check-input" type="radio" value="darad" name="chnseller">
+                      <input class="form-check-input" type="radio" value="darad" name="chnseller" id="newcoustomer">
                       <label class="form-check-label">خریدار جدید</label>
                     </div>
 					<div class="form-check">
-                      <input class="form-check-input" type="radio" value="nadarad" name="chnseller">
+                      <input class="form-check-input" type="radio" value="nadarad" name="chnseller" id="coustomers">
                       <label class="form-check-label">نمایش خریدار ها</label>
                     </div>
 				  <div class="form-group">
@@ -617,7 +630,7 @@ include "../../functs/basedata.php";
                     </div>
 				  <div class="form-check">
                       <input class="form-check-input" type="radio" value="ghrasmi" name="chrasmi">
-                      <label class="form-check-label">فاکتو غیر رسمی</label>
+                      <label class="form-check-label">فاکتور غیر رسمی</label>
                     </div>
 				  <div class="form-group">
                     <label>نام فروشنده</label>
@@ -642,21 +655,21 @@ include "../../functs/basedata.php";
                     </select>
                   </div>
                 <div class="card-body">
-                  <div class="form-group">
-                    <label>نام کالا</label>
-                    <select class="form-control" name="namekala">
-					<?php
+				  <div class="form-group">
+                  <label>نام کالا</label>
+                  <select name="namekala[]" multiple="multiple" class="form-control select2" style="width: 100%;text-align: right">
+                    <?php
 						$sqlprname = "SELECT * FROM `products`";
                         $resultprname=$connect->query($sqlprname);
                         foreach($resultprname as $rowsprname)
                         {
 	                    echo '
-					    <option>'.$rowsprname["name"].'</option>
+					    <option value="'.$rowsprname["name"].'">'.$rowsprname["name"].'</option>
 					    ';
                         }
 					?>
-                    </select>
-                  </div>
+                  </select>
+                </div>
 					<div class="form-group">
                     <label >سایز کالا</label>
                     <input type="text" class="form-control" placeholder="سایز کالا را وارد کنید" name="txtsizepr">
@@ -705,30 +718,30 @@ include "../../functs/basedata.php";
                     </div>
 					<div class="form-group">
                     <label>دسته</label>
-                    <select class="form-control" name="txtdaste">
+                    <select class="form-control" name="txtdaste" id="txtdastee">
 					    <option id="first-cho">موزی</option>
 						<option id="sec-cho">رکابی</option>
-						<option id="fou-cho">بندی</option>
-						<option id="fi-section">تقویت</option>
+						<option id="thi-cho">بندی</option>
+						<option id="fou-cho">تقویت</option>
                     </select>
                   </div>
 
 						<label >لب کاست</label>
 				    <div class="form-check">
-                      <input class="form-check-input radio-sec" type="radio" value="darad" name="chlabd" id="myRadio">
+                      <input class="form-check-input radio-sec" type="radio" value="darad" name="chlabd" id="labd" disabled="">
                       <label class="form-check-label">دارد</label>
                     </div>
 					<div class="form-check">
-                      <input class="form-check-input radio-sec" type="radio" value="nadarad" name="chlabd">
+                      <input class="form-check-input radio-sec" type="radio" value="nadarad" name="chlabd" disabled="" id="labn">
                       <label class="form-check-label">ندارد</label>
                     </div>
 						<label >ته کاست</label>
 				    <div class="form-check">
-                      <input class="form-check-input" type="radio" value="darad" name="chtd">
+                      <input class="form-check-input" type="radio" value="darad" name="chtd" disabled="" id="tahd">
                       <label class="form-check-label">دارد</label>
                     </div>
 					<div class="form-check">
-                      <input class="form-check-input" type="radio" value="ندارد" name="chtd">
+                      <input class="form-check-input" type="radio" value="ندارد" name="chtd" disabled="" id="tahn">
                       <label class="form-check-label">ندارد</label>
                     </div>
 					<div class="form-group">
@@ -795,7 +808,14 @@ include "../../functs/basedata.php";
 			$datepr=xss(date("Y/m/d"));
 			$txtphone=xss($_GET["txtphone"]);
 			$txtnameseller=xss($_GET["txtnameseller"]);
-			$namekala=xss($_GET["namekala"]);
+			$namekalaf=$_GET["namekala"];
+			$namekalaff="";
+//			$namekala_final[];
+//			foreach($namekala as $kala){
+//				array_push($namekala_final,$kala)
+//			}
+			$namekala = implode($namekalaff."-",$namekalaf);
+			echo $namekala;
 			$txtsizepr=xss($_GET["txtsizepr"]);
 			$txtzekhamat=xss($_GET["txtzekhamat"]);
 			$txtvazn=xss($_GET["txtvazn"]);
@@ -1345,35 +1365,157 @@ include "../../functs/basedata.php";
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="../../plugins/input-mask/jquery.inputmask.js"></script>
+<script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="../../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<!-- SlimScroll 1.3.0 -->
+<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="../../plugins/iCheck/icheck.min.js"></script>
 <!-- FastClick -->
 <script src="../../plugins/fastclick/fastclick.js"></script>
+<!-- Persian Data Picker -->
+<script src="../../dist/js/persian-date.min.js"></script>
+<script src="../../dist/js/persian-datepicker.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
-<!--
-<scrip>
-$( ".form-control" ).change(function () {
-    $( ".form-control option:selected" ).each(function() {
-      if($(this).attr("id")=="first-cho"){
-		console.log('sec1');
-	  }
+<!-- Page script -->
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
 
-	  else if($(this).attr("id")=="sec-cho"){
-		console.log('sec2');
-	  }
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
 
-	  else if($(this).attr("id")=="sec-cho"){
-		console.log('sec3');
-	  }
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
 
-		else if($(this).attr("id")=="fou-cho"){
-			console.log('sec4');
-		 }
-    });
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+
+    $('.normal-example').persianDatepicker();
+
+
+
+
   })
-</scrip>
--->
+</script>
+				
+<script>
+$( ".form-check" ).change(function () {
+//    $( ".form-control option:selected" ).each(function() {
+//      if($(this).attr("id")=="first-cho"){
+//		console.log('sec1');
+//	  }
+//
+//	  else if($(this).attr("id")=="sec-cho"){
+//		console.log('sec2');
+//	  }
+//
+//	  else if($(this).attr("id")=="sec-cho"){
+//		console.log('sec3');
+//	  }
+//
+//		else if($(this).attr("id")=="fou-cho"){
+//			console.log('sec4');
+//		 }
+//    });
+	
+	$('.form-check input').each(function(){
+		if($('#newcoustomer').prop('checked')){
+		   $('#txtcustomers').attr('disabled','');
+			$('#txtnewcustomer').removeAttr('disabled','');
+		   }
+	else if($('#coustomers').prop('checked')){
+		   
+		$('#txtnewcustomer').attr('disabled','');
+			$('#txtcustomers').removeAttr('disabled','');
+		   }
+	
+//	console.log('testss');
+	})
+	
+  });
+//	$('#txtdastee').each(function(){
+//		if ($('#thi-cho').is(':selected')){
+//		$('#labd').removeAttr('disabled','');
+//		$('#labn').removeAttr('disabled','');
+//		$('#tahd').removeAttr('disabled','');
+//		$('#tahn').removeAttr('disabled','');
+//		
+//	}
+	$('#txtdastee').change(function(){
+		if ($('#first-cho').is(':selected')||$('#sec-cho').is(':selected')){
+//		if(this.selected){
+		   	$('#labd').attr('disabled',"");
+			$('#labn').attr('disabled',"");
+			$('#tahd').attr('disabled',"");
+			$('#tahn').attr('disabled',"");
+			
+			$('#labd').attr('value',"");
+			$('#labn').attr('value',"");
+			$('#tahd').attr('value',"");
+			$('#tahn').attr('value',"");
+		   }
+		
+		if ($('#thi-cho').is(':selected')){
+//		if(this.selected){
+		   	$('#labd').removeAttr('disabled');
+			$('#labn').removeAttr('disabled');
+			$('#tahd').removeAttr('disabled');
+			$('#tahn').removeAttr('disabled');
+			
+			$('#labd').attr('value',"darad");
+			$('#labn').attr('value',"nadarad");
+			$('#tahd').attr('value',"darad");
+			$('#tahn').attr('value',"ندارد");
+			
+		   }
+		if ($('#fou-cho').is(':selected')){
+//		if(this.selected){
+		   	$('#labd').attr('disabled',"");
+			$('#labn').attr('disabled',"");
+			$('#tahd').attr('value',"darad");
+			$('#tahn').attr('value',"ندارد");
+			$('#tahd').removeAttr('disabled');
+			$('#tahn').removeAttr('disabled');
+		   }
+	})
+
+	
+//	});
+</script>
 <script>
 function itpro(Number) 
   {
